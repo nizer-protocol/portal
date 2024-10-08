@@ -1,0 +1,112 @@
+---
+import Container from "./Container.astro";
+
+---
+
+<div id="Swap">
+    <Container>
+      <div class="flex flex-col items-center justify-center min-h-screen text-white">
+        <!-- Swap Container -->
+        <div class="w-full max-w-2xl shadow-lg rounded-lg p-6">
+          <h2 class="mb-3 text-center text-3xl font-bold text-gray-800 dark:text-white md:text-4xl">
+            Wrap to Bol-Sol
+          </h2>
+          <div class="w-full mb-6">
+            <img height="50" width="50"
+              src="./images/logos/bowsol.png"
+              alt="Bowsol" class="w-20 h-auto rounded-sm shadow-md" />
+          </div>
+          <!-- Token Swap Section -->
+          <div class="flex justify-between items-center space-x-4">
+            <!-- Token Input Section -->
+            <div class="w-1/2 flex flex-col space-y-2">
+              <label for="fromToken" class="text-sm font-semibold">From</label>
+              <div class="flex items-center space-x-2 bg-gray-100 text-black p-3 rounded-lg">
+                <input
+                  type="text"
+                  id="fromToken"
+                  placeholder="0.00"
+                  class="w-full bg-transparent outline-none text-xl font-bold"
+                />
+                <select
+                  id="tokenList"
+                  class="p-2 text-gray-800 bg-gray-100 rounded-md shadow-sm">
+                  <option value="sol">SOL</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Swap Button in the middle -->
+            <div class="flex items-center pt-5">
+              <button class="transform rotate-90 bg-gray-200 p-2 rounded-full">
+                <svg
+                  class="w-6 h-6 text-gray-800"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 15l7-7 7 7"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Token Output Section -->
+            <div class="w-1/2 flex flex-col space-y-2">
+              <label for="toToken" class="text-sm font-semibold">To</label>
+              <div class="flex items-center space-x-2 bg-gray-100 text-black p-3 rounded-lg">
+                <input
+                  type="text"
+                  id="toToken"
+                  placeholder="0.00"
+                  class="w-full bg-transparent outline-none text-xl font-bold"
+                />
+                <select
+                  id="tokenList"
+                  class="p-2 text-gray-800 bg-gray-100 rounded-md shadow-sm">
+                  <option value="bow-sol">Bow-SOL</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Price Info Section (Horizontally aligned) -->
+          <div class="flex justify-between items-center mt-6 space-x-4">
+            <div class="flex flex-col text-center">
+              <span class="text-sm text-gray-500">1 SOL =</span>
+              <span class="text-lg font-semibold">1.0013 BOW-SOL</span>
+            </div>
+            <div class="flex flex-col text-center">
+              <span class="text-sm text-gray-500">1 BOW-SOL =</span>
+              <span class="text-lg font-semibold">0.9998 SOL</span>
+            </div>
+          </div>
+
+          <!-- Swap Button -->
+          <div class="mt-6">
+            <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-primary">
+              Wrap
+            </button>
+          </div>
+        </div>
+      </div>
+    </Container>
+</div>
+
+<script>
+  function updateToToken() {
+    const fromTokenInput = document.getElementById('fromToken') as HTMLInputElement;
+    const toTokenInput = document.getElementById('toToken') as HTMLInputElement;
+    toTokenInput.value = (parseFloat(fromTokenInput.value) * 0.999978).toFixed(6);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const fromTokenInput = document.getElementById('fromToken') as HTMLInputElement;
+    fromTokenInput.addEventListener('input', updateToToken);
+  });
+</script>
